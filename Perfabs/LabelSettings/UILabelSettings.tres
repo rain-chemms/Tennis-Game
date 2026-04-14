@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://d2ihnv0k464p5"]
+
+[ext_resource type="FontFile" uid="uid://csoplqxja2h0s" path="res://Source/Font/English/Sekuya-Regular/Sekuya-Regular.ttf" id="1_fsaqj"]
+
+[resource]
+font = ExtResource("1_fsaqj")
+font_size = 42
+font_color = Color(0.117530085, 0.1175301, 0.117530085, 1)
+outline_size = 2

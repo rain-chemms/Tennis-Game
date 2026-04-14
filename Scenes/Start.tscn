@@ -1,0 +1,187 @@
+[gd_scene format=3 uid="uid://dgoxeqwe4r8sx"]
+
+[ext_resource type="Texture2D" uid="uid://cd2nfkdwm816y" path="res://Source/Texture/Icon/Logo.png" id="1_og4jd"]
+[ext_resource type="LabelSettings" uid="uid://c3ar6ghki57j2" path="res://Perfabs/LabelSettings/StartLabelSettings.tres" id="2_nt0jr"]
+[ext_resource type="Texture2D" uid="uid://d37jggh6bnnew" path="res://Source/Texture/Icon/LargeMonoChromeDark.png" id="3_y4ycm"]
+[ext_resource type="Script" uid="uid://drw8hofjfppwn" path="res://Scripts/Start/StartSceneLoader.gd" id="4_1lxxj"]
+[ext_resource type="Script" uid="uid://bufovhvee020j" path="res://Scripts/Start/StartImageJumper.gd" id="5_37b1d"]
+
+[sub_resource type="Animation" id="Animation_37b1d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LogoPanel/EngineLogo:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1lxxj"]
+resource_name = "Start"
+length = 4.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LogoPanel/WorkRoomLogo:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LogoPanel/Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 2, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LogoPanel/Label:visible_characters")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.083333336, 0, 0, 0, 15, -0.16111112, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 1.25)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LogoPanel/EngineLogo:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.5, 3, 4, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SceneLoader")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(4.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["MainMenu.tscn", false],
+"method": &"ShiftScene"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_37b1d"]
+_data = {
+&"RESET": SubResource("Animation_37b1d"),
+&"Start": SubResource("Animation_1lxxj")
+}
+
+[node name="Start" type="Control" unique_id=1879082858]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="." unique_id=32975197]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.994
+offset_left = -14.0
+offset_top = -12.0
+offset_right = 15.0
+offset_bottom = 13.8880005
+color = Color(0.17744365, 0.17744368, 0.17744365, 1)
+
+[node name="LogoPanel" type="Panel" parent="." unique_id=294024900]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WorkRoomLogo" type="TextureRect" parent="LogoPanel" unique_id=605548293]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_og4jd")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="LogoPanel" unique_id=1480597282]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.734
+anchor_right = 0.5
+anchor_bottom = 0.734
+offset_left = -112.5
+offset_top = -21.930023
+offset_right = 117.5
+offset_bottom = 23.069977
+grow_horizontal = 2
+grow_vertical = 2
+text = "FireBlue Games"
+label_settings = ExtResource("2_nt0jr")
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="EngineLogo" type="TextureRect" parent="LogoPanel" unique_id=1594818196]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.5
+offset_top = -113.5
+offset_right = 2271.5
+offset_bottom = 910.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_y4ycm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1988131707]
+libraries/ = SubResource("AnimationLibrary_37b1d")
+autoplay = &"Start"
+
+[node name="SceneLoader" type="Node2D" parent="." unique_id=342670586]
+script = ExtResource("4_1lxxj")
+
+[node name="ImageJumper" type="Node2D" parent="." unique_id=839665259 node_paths=PackedStringArray("animationPlayer")]
+script = ExtResource("5_37b1d")
+animationPlayer = NodePath("../AnimationPlayer")

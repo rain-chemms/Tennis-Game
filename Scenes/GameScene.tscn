@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://bkqr8hka0u6vw"]
+
+[ext_resource type="Texture2D" uid="uid://bj61gri8wyopy" path="res://Source/Texture/Games/TableTennisTable.png" id="1_2wl7v"]
+[ext_resource type="PackedScene" uid="uid://2uhu1q2t42qa" path="res://Scenes/TennisBall.tscn" id="2_4bvgx"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4bvgx"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3mbwn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4bvgx"]
+size = Vector2(646, 13)
+
+[node name="GameScene" type="Node2D" unique_id=592222660]
+
+[node name="TennisTable" type="RigidBody2D" parent="." unique_id=200797136]
+lock_rotation = true
+freeze = true
+
+[node name="UpEdge" type="CollisionShape2D" parent="TennisTable" unique_id=1229662215]
+position = Vector2(0, -1)
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_4bvgx")
+
+[node name="DownEdge" type="CollisionShape2D" parent="TennisTable" unique_id=760760447]
+position = Vector2(1153, 647)
+shape = SubResource("WorldBoundaryShape2D_4bvgx")
+
+[node name="LeftEdge" type="CollisionShape2D" parent="TennisTable" unique_id=322061112]
+position = Vector2(0, -1)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_3mbwn")
+disabled = true
+
+[node name="RightEdge" type="CollisionShape2D" parent="TennisTable" unique_id=790923754]
+position = Vector2(1153, 647)
+rotation = -1.5707963
+shape = SubResource("WorldBoundaryShape2D_3mbwn")
+disabled = true
+
+[node name="TableTennisTable" type="Sprite2D" parent="TennisTable" unique_id=1394443892]
+position = Vector2(576.5, 323)
+scale = Vector2(0.4496094, 0.40375003)
+texture = ExtResource("1_2wl7v")
+
+[node name="TennisBall" parent="." unique_id=1769404096 instance=ExtResource("2_4bvgx")]
+position = Vector2(351, 190)
+
+[node name="RightPlayerEdge" type="RigidBody2D" parent="." unique_id=1314645049]
+position = Vector2(1158, 323)
+collision_layer = 2
+collision_mask = 0
+lock_rotation = true
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightPlayerEdge" unique_id=379631908]
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_4bvgx")
+debug_color = Color(0.7, 0, 0.011666489, 0.41960785)
+
+[node name="LeftPlayerEdge" type="RigidBody2D" parent="." unique_id=477040176]
+position = Vector2(-5, 323)
+collision_layer = 2
+collision_mask = 0
+lock_rotation = true
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftPlayerEdge" unique_id=1234142205]
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_4bvgx")
+debug_color = Color(0.7, 0, 0.011666489, 0.41960785)
+
+[node name="TennisWeb" type="RigidBody2D" parent="." unique_id=1438132091]
+position = Vector2(576, 323)
+collision_layer = 2
+collision_mask = 0
+lock_rotation = true
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TennisWeb" unique_id=824680899]
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_4bvgx")
+debug_color = Color(0.7, 0, 0.011666489, 0.41960785)

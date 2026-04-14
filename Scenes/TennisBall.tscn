@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://2uhu1q2t42qa"]
+
+[ext_resource type="Script" uid="uid://ckuvndi52nujh" path="res://Scripts/Games/TennisBall.gd" id="1_fdwen"]
+[ext_resource type="Texture2D" uid="uid://d1er4ggoq6143" path="res://Source/Texture/Games/TennisBall.png" id="2_5o1is"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kc8o2"]
+radius = 38.118237
+
+[node name="TennisBall" type="RigidBody2D" unique_id=1769404096]
+mass = 0.01
+script = ExtResource("1_fdwen")
+
+[node name="TennisBall" type="Sprite2D" parent="." unique_id=363945286]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_5o1is")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1654562914]
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CircleShape2D_kc8o2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cdx00t8aawgse"]
+
+[ext_resource type="Script" uid="uid://bampcrcdeg2vr" path="res://Scripts/Games/Player.gd" id="1_kyqiw"]
+[ext_resource type="Texture2D" uid="uid://rbxh03ittsmx" path="res://Source/Texture/Games/TennisBoard.png" id="1_rpqav"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
+size = Vector2(32, 240)
+
+[node name="Player" type="RigidBody2D" unique_id=601225930]
+mass = 100.0
+lock_rotation = true
+freeze_mode = 1
+script = ExtResource("1_kyqiw")
+
+[node name="TennisBoard" type="Sprite2D" parent="." unique_id=147257882]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_rpqav")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1572716112]
+shape = SubResource("RectangleShape2D_kyqiw")

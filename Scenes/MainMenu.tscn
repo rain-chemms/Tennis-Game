@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://yibyp7ry6gsw"]
+
+[ext_resource type="Texture2D" uid="uid://d2ckaebvawalx" path="res://Source/Texture/Button/Button_Normal.png" id="1_ot053"]
+[ext_resource type="Texture2D" uid="uid://bfhlgjgj7qmik" path="res://Source/Texture/Button/Button_Clicked.png" id="2_3dx3g"]
+[ext_resource type="Texture2D" uid="uid://cve47o3hm141e" path="res://Source/Texture/Button/Button_Selected.png" id="3_5ry4h"]
+[ext_resource type="Texture2D" uid="uid://l871pn2l04m5" path="res://Source/Texture/Button/Button_Disable.png" id="4_o168s"]
+[ext_resource type="LabelSettings" uid="uid://chjbbhy4gb2gj" path="res://Perfabs/LabelSettings/MenuLabelSettings.tres" id="5_jykax"]
+[ext_resource type="PackedScene" uid="uid://bkqr8hka0u6vw" path="res://Scenes/GameScene.tscn" id="6_8um5k"]
+[ext_resource type="Script" uid="uid://bdujxlut330g8" path="res://Scripts/Games/StartButton.gd" id="6_cmrfp"]
+[ext_resource type="LabelSettings" uid="uid://d2ihnv0k464p5" path="res://Perfabs/LabelSettings/UILabelSettings.tres" id="6_koqhg"]
+[ext_resource type="Script" uid="uid://d1fom4plufu2q" path="res://Scripts/Games/ExitButton.gd" id="7_cmrfp"]
+[ext_resource type="PackedScene" uid="uid://cdx00t8aawgse" path="res://Scenes/Player.tscn" id="10_loo7a"]
+
+[node name="MainMenuUI" type="Control" unique_id=544944147]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameScene" parent="." unique_id=592222660 instance=ExtResource("6_8um5k")]
+
+[node name="TextPanel" type="ReferenceRect" parent="." unique_id=1167999576]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.72900003
+anchor_top = 0.522
+anchor_right = 0.95500004
+anchor_bottom = 0.95800006
+offset_left = 0.19195557
+offset_top = -0.25601196
+offset_right = -0.16003418
+offset_bottom = 0.21594238
+
+[node name="StartButton" type="TextureButton" parent="TextPanel" unique_id=751238932]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.108
+anchor_right = 0.88500005
+anchor_bottom = 0.16000001
+offset_left = -0.07999992
+offset_right = -0.1000061
+offset_bottom = -0.040008545
+texture_normal = ExtResource("1_ot053")
+texture_pressed = ExtResource("2_3dx3g")
+texture_hover = ExtResource("3_5ry4h")
+texture_disabled = ExtResource("4_o168s")
+texture_focused = ExtResource("3_5ry4h")
+script = ExtResource("6_cmrfp")
+
+[node name="StartLabel" type="Label" parent="TextPanel/StartButton" unique_id=1083877347]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.045
+anchor_top = 0.133
+anchor_right = 0.94100004
+anchor_bottom = 0.86700004
+offset_left = -0.09000015
+offset_top = 0.024999619
+offset_right = -0.08201599
+offset_bottom = -0.025001526
+text = "Start"
+label_settings = ExtResource("6_koqhg")
+
+[node name="ExtButton" type="TextureButton" parent="TextPanel" unique_id=59331811]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.104
+anchor_top = 0.37100002
+anchor_right = 0.873
+anchor_bottom = 0.63600004
+offset_left = -0.040000916
+offset_top = 0.006996155
+offset_right = 0.019989014
+offset_bottom = -31.812012
+texture_normal = ExtResource("1_ot053")
+texture_pressed = ExtResource("2_3dx3g")
+texture_hover = ExtResource("3_5ry4h")
+texture_disabled = ExtResource("4_o168s")
+texture_focused = ExtResource("3_5ry4h")
+script = ExtResource("7_cmrfp")
+
+[node name="ExitLabel" type="Label" parent="TextPanel/ExtButton" unique_id=1351197873]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.17
+anchor_top = 0.133
+anchor_right = 0.85
+anchor_bottom = 0.86700004
+offset_top = 0.024999619
+offset_bottom = -0.025001526
+text = "Exit"
+label_settings = ExtResource("6_koqhg")
+
+[node name="NamePanel" type="ReferenceRect" parent="." unique_id=917724979]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.037
+anchor_top = 0.074
+anchor_right = 0.65800005
+anchor_bottom = 0.83500004
+offset_left = 0.37599945
+offset_top = 0.048000336
+offset_right = -0.016052246
+offset_bottom = -0.08001709
+
+[node name="GameName" type="Label" parent="NamePanel" unique_id=2125888222]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.052
+anchor_top = 0.018000001
+anchor_right = 0.952
+anchor_bottom = 0.35900003
+offset_left = 0.071998596
+offset_top = 0.26999855
+offset_right = 4.0719604
+offset_bottom = -6.399002
+text = "Tabel Tennis"
+label_settings = ExtResource("5_jykax")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" parent="." unique_id=601225930 instance=ExtResource("10_loo7a")]
+position = Vector2(34, 134)
+
+[connection signal="pressed" from="TextPanel/ExtButton" to="TextPanel/ExtButton" method="_on_pressed"]
