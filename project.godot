@@ -16,11 +16,19 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/show_image=false
 boot_splash/stretch_mode=0
 
+[autoload]
+
+Global="*uid://2rkyhibey2yy"
+
 [display]
 
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[global_group]
+
+TennisBall="代表乒乓球"
 
 [input]
 

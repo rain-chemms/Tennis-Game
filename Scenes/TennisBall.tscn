@@ -6,9 +6,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_kc8o2"]
 radius = 38.118237
 
-[node name="TennisBall" type="RigidBody2D" unique_id=1769404096]
+[node name="TennisBall" type="RigidBody2D" unique_id=1769404096 groups=["TennisBall"]]
 mass = 0.01
 script = ExtResource("1_fdwen")
+speedIncreaseUnit = 1.0
+maxSpeed = 900.0
 
 [node name="TennisBall" type="Sprite2D" parent="." unique_id=363945286]
 scale = Vector2(0.4, 0.4)

@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://bj61gri8wyopy" path="res://Source/Texture/Games/TableTennisTable.png" id="1_2wl7v"]
 [ext_resource type="PackedScene" uid="uid://2uhu1q2t42qa" path="res://Scenes/TennisBall.tscn" id="2_4bvgx"]
+[ext_resource type="Texture2D" uid="uid://c002cn06mptoh" path="res://Source/Texture/Games/TimeGrid.png" id="3_3mbwn"]
+[ext_resource type="PackedScene" uid="uid://cdx00t8aawgse" path="res://Scenes/Player.tscn" id="4_jwv4s"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4bvgx"]
 
@@ -29,21 +31,16 @@ shape = SubResource("WorldBoundaryShape2D_4bvgx")
 position = Vector2(0, -1)
 rotation = 1.5707964
 shape = SubResource("WorldBoundaryShape2D_3mbwn")
-disabled = true
 
 [node name="RightEdge" type="CollisionShape2D" parent="TennisTable" unique_id=790923754]
 position = Vector2(1153, 647)
 rotation = -1.5707963
 shape = SubResource("WorldBoundaryShape2D_3mbwn")
-disabled = true
 
 [node name="TableTennisTable" type="Sprite2D" parent="TennisTable" unique_id=1394443892]
 position = Vector2(576.5, 323)
 scale = Vector2(0.4496094, 0.40375003)
 texture = ExtResource("1_2wl7v")
-
-[node name="TennisBall" parent="." unique_id=1769404096 instance=ExtResource("2_4bvgx")]
-position = Vector2(351, 190)
 
 [node name="RightPlayerEdge" type="RigidBody2D" parent="." unique_id=1314645049]
 position = Vector2(1158, 323)
@@ -80,3 +77,43 @@ freeze = true
 rotation = -1.5707964
 shape = SubResource("RectangleShape2D_4bvgx")
 debug_color = Color(0.7, 0, 0.011666489, 0.41960785)
+
+[node name="TimeClock" type="Node2D" parent="." unique_id=1278583122]
+position = Vector2(577, 25)
+scale = Vector2(0.5, 0.5)
+
+[node name="MinuteClock" type="Node2D" parent="TimeClock" unique_id=1673822648]
+position = Vector2(-59, 0)
+
+[node name="TimeGrid2" type="Sprite2D" parent="TimeClock/MinuteClock" unique_id=238007973]
+position = Vector2(-25, 0)
+texture = ExtResource("3_3mbwn")
+
+[node name="TimeGrid1" type="Sprite2D" parent="TimeClock/MinuteClock" unique_id=2075433702]
+position = Vector2(25, 0)
+texture = ExtResource("3_3mbwn")
+
+[node name="SecondClock" type="Node2D" parent="TimeClock" unique_id=1766195997]
+position = Vector2(59, 0)
+
+[node name="TimeGrid2" type="Sprite2D" parent="TimeClock/SecondClock" unique_id=482106003]
+position = Vector2(-25, 0)
+texture = ExtResource("3_3mbwn")
+
+[node name="TimeGrid1" type="Sprite2D" parent="TimeClock/SecondClock" unique_id=1653635504]
+position = Vector2(25, 0)
+texture = ExtResource("3_3mbwn")
+
+[node name="LeftPlayer" parent="." unique_id=601225930 instance=ExtResource("4_jwv4s")]
+position = Vector2(20, 323)
+isControl = true
+
+[node name="RightPlayer" parent="." unique_id=1665500179 instance=ExtResource("4_jwv4s")]
+position = Vector2(777, 323)
+side = true
+isBot = true
+botSlowActiveDistance = 1.0
+botMoveForce = 3000.0
+
+[node name="TennisBall" parent="." unique_id=643390028 instance=ExtResource("2_4bvgx")]
+position = Vector2(351, 190)
