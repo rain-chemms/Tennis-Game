@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://l871pn2l04m5" path="res://Source/Texture/Button/Button_Disable.png" id="4_o168s"]
 [ext_resource type="LabelSettings" uid="uid://chjbbhy4gb2gj" path="res://Perfabs/LabelSettings/MenuLabelSettings.tres" id="5_jykax"]
 [ext_resource type="PackedScene" uid="uid://bkqr8hka0u6vw" path="res://Scenes/GameScene.tscn" id="6_8um5k"]
-[ext_resource type="Script" uid="uid://bdujxlut330g8" path="res://Scripts/Games/StartButton.gd" id="6_cmrfp"]
 [ext_resource type="LabelSettings" uid="uid://d2ihnv0k464p5" path="res://Perfabs/LabelSettings/UILabelSettings.tres" id="6_koqhg"]
 [ext_resource type="Script" uid="uid://d1fom4plufu2q" path="res://Scripts/Games/ExitButton.gd" id="7_cmrfp"]
 
@@ -77,7 +76,6 @@ texture_pressed = ExtResource("2_3dx3g")
 texture_hover = ExtResource("3_5ry4h")
 texture_disabled = ExtResource("4_o168s")
 texture_focused = ExtResource("3_5ry4h")
-script = ExtResource("6_cmrfp")
 
 [node name="SigStrLabel" type="Label" parent="ButtonPanel/SignalStartButton" unique_id=1083877347]
 layout_mode = 1
@@ -155,4 +153,5 @@ label_settings = ExtResource("5_jykax")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="pressed" from="ButtonPanel/SignalStartButton" to="GameScene" method="SignalGameStart"]
 [connection signal="pressed" from="ButtonPanel/ExtButton" to="ButtonPanel/ExtButton" method="_on_pressed"]

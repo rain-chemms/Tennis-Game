@@ -15,9 +15,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bvgx"]
 size = Vector2(646, 13)
 
-[node name="GameScene" type="Node2D" unique_id=592222660 node_paths=PackedStringArray("timer")]
+[node name="GameScene" type="Node2D" unique_id=592222660 node_paths=PackedStringArray("timer", "tennisBall", "leftPlayer", "rightPlayer", "tennisWeb")]
 script = ExtResource("1_lohlh")
 timer = NodePath("TimeClock/ClockTimer")
+tennisBall = NodePath("TennisBall")
+leftPlayer = NodePath("LeftPlayer")
+rightPlayer = NodePath("RightPlayer")
+tennisWeb = NodePath("TennisWeb")
+playerInitYOffset = 400.0
+playerInitXOffset = 100.0
 
 [node name="TennisTable" type="RigidBody2D" parent="." unique_id=200797136]
 lock_rotation = true
