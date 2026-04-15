@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://dv7kyc0mv1cxg"]
+
+[ext_resource type="FontFile" uid="uid://dtpdiwli1pkvo" path="res://Source/Font/Chinese/MaShanZheng-Regular/MaShanZheng-Regular.ttf" id="1_pecfe"]
+
+[resource]
+font = ExtResource("1_pecfe")
+font_size = 92
+outline_size = 9
+outline_color = Color(0, 0, 1, 1)
+shadow_size = 12
+shadow_color = Color(0, 0.2810472, 0.34351483, 0.80784315)

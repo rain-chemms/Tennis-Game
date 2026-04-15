@@ -16,6 +16,13 @@ const TENNISBALL_SCRIPT = preload("res://Scripts/Games/TennisBall.gd")
 
 @export var gameOverPanel:Control = null#结算界面
 
+@export var winnerLabel:Label = null#胜利者文字显示
+@export var leftPointLabel:Label = null
+@export var rightPointLabel:Label = null
+const LEFTWIN_LABELSETTINGS = preload("res://Perfabs/LabelSettings/LeftWin.tres")
+const RIGHTWIN_LABELSETTINGS = preload("res://Perfabs/LabelSettings/RightWin.tres")
+const TIEGAME_LABELSETTINGS = preload("res://Perfabs/LabelSettings/TieGame.tres")
+
 func _ready() -> void:
 	#默认启动计时器
 	if timer != null:
@@ -35,6 +42,24 @@ func GameOver()->void:
 		rightPlayer.isControl = false
 	if massagePanel != null:
 		massagePanel.visible = false
+	var leftG:int = Global.leftGoal
+	var rightG:int = Global.rightGoal
+	#更新得分
+	if leftPointLabel!=null:
+		leftPointLabel.text = str(leftG)
+	if rightPointLabel!=null:
+		rightPointLabel.text = str(rightG)
+	#更新显示文字
+	if winnerLabel!=null:
+		if rightG == leftG:#平局
+			winnerLabel.text = "TIE"
+			winnerLabel.label_settings = TIEGAME_LABELSETTINGS
+		elif  rightG > leftG:#右侧获胜
+			winnerLabel.text = "RIGHT"
+			winnerLabel.label_settings = RIGHTWIN_LABELSETTINGS
+		elif rightG < leftG:#左侧获胜
+			winnerLabel.text = "LEFT"
+			winnerLabel.label_settings = LEFTWIN_LABELSETTINGS
 	#显示结算界面
 	if gameOverPanel!=null:
 		gameOverPanel.visible = true

@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://duq2a0uq6xwku" path="res://Source/Texture/Button/Fork/SelectedFork.png" id="14_yxkem"]
 [ext_resource type="Texture2D" uid="uid://cke3dtma6p6pw" path="res://Source/Texture/Button/Fork/DisabledFork.png" id="15_7v4os"]
 [ext_resource type="Texture2D" uid="uid://cadlohqq4ta3f" path="res://Source/Texture/Button/Fork/HlightedFork.png" id="16_pjscj"]
+[ext_resource type="LabelSettings" uid="uid://b1rpuwtorh6cq" path="res://Perfabs/LabelSettings/TieGame.tres" id="18_yxkem"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fh7cp"]
 font = ExtResource("10_if7li")
@@ -58,6 +59,56 @@ font_size = 22
 font_color = Color(0.117530085, 0.1175301, 0.117530085, 1)
 outline_size = 6
 
+[sub_resource type="LabelSettings" id="LabelSettings_7v4os"]
+font = ExtResource("12_riqfo")
+font_size = 48
+font_color = Color(0.38431373, 0.46666667, 0.84705883, 1)
+outline_size = 13
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 15
+shadow_color = Color(0.050980393, 0.050980393, 0.050980393, 0.7882353)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6byu3"]
+font = ExtResource("10_if7li")
+font_size = 73
+font_color = Color(0.9999998, 0.2586443, 0.6059083, 1)
+outline_size = 13
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 15
+shadow_color = Color(0.050980393, 0.050980393, 0.050980393, 0.7882353)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pjscj"]
+font = ExtResource("10_if7li")
+font_size = 78
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 6
+shadow_color = Color(0.20735261, 0.18845677, 0.23257846, 0.80784315)
+
+[sub_resource type="LabelSettings" id="LabelSettings_leunp"]
+font = ExtResource("10_if7li")
+font_size = 80
+outline_size = 9
+outline_color = Color(0, 0, 1, 1)
+shadow_size = 12
+shadow_color = Color(0, 0.2810472, 0.34351483, 0.80784315)
+
+[sub_resource type="LabelSettings" id="LabelSettings_m7n2d"]
+font = ExtResource("10_if7li")
+font_size = 80
+outline_size = 6
+outline_color = Color(1, 0, 0, 1)
+shadow_size = 6
+shadow_color = Color(0.94509804, 0.16470589, 0.078431375, 0.80784315)
+
+[sub_resource type="LabelSettings" id="LabelSettings_65hh5"]
+font = ExtResource("10_if7li")
+font_size = 99
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 14
+shadow_color = Color(0.13333334, 0.13333334, 0.13333334, 0.84313726)
+
 [sub_resource type="Animation" id="Animation_loo7a"]
 resource_name = "HideUI"
 
@@ -66,7 +117,7 @@ _data = {
 &"HideUI": SubResource("Animation_loo7a")
 }
 
-[node name="MainMenuUI" type="Control" unique_id=544944147]
+[node name="MainMenuUI" type="Control" unique_id=544944147 node_paths=PackedStringArray("mainPanel", "settingPanel", "matchPanel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,9 +125,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cmrfp")
+mainPanel = NodePath("MainPanel")
+settingPanel = NodePath("SettingPanel")
+matchPanel = NodePath("MatchSettings")
 
-[node name="GameScene" parent="." unique_id=592222660 node_paths=PackedStringArray("gameOverPanel") instance=ExtResource("6_8um5k")]
+[node name="GameScene" parent="." unique_id=592222660 node_paths=PackedStringArray("gameOverPanel", "winnerLabel", "leftPointLabel", "rightPointLabel") instance=ExtResource("6_8um5k")]
 gameOverPanel = NodePath("../GameOverPanel")
+winnerLabel = NodePath("../GameOverPanel/Winner/WinnerLabel")
+leftPointLabel = NodePath("../GameOverPanel/LastPoint/LeftPoint")
+rightPointLabel = NodePath("../GameOverPanel/LastPoint/RightPoint")
 
 [node name="MainPanel" type="ReferenceRect" parent="." unique_id=155041171]
 layout_mode = 1
@@ -598,7 +655,6 @@ texture_disabled = ExtResource("15_7v4os")
 texture_focused = ExtResource("16_pjscj")
 
 [node name="GameOverPanel" type="Panel" parent="." unique_id=1487631072]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.155
@@ -615,14 +671,130 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.053000003
 anchor_bottom = 0.091000006
-offset_right = 211.427
-offset_bottom = 211.41
+offset_right = 211.53299
+offset_bottom = 211.50099
 scale = Vector2(0.175, 0.175)
 texture_normal = ExtResource("12_2x1g0")
 texture_pressed = ExtResource("13_riqfo")
 texture_hover = ExtResource("14_yxkem")
 texture_disabled = ExtResource("15_7v4os")
 texture_focused = ExtResource("16_pjscj")
+
+[node name="ScoreName" type="Label" parent="GameOverPanel" unique_id=820087846]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.128
+anchor_top = 0.08400001
+anchor_right = 0.846
+anchor_bottom = 0.21300001
+offset_left = -0.39200592
+offset_top = -0.07600403
+offset_right = 0.20599365
+offset_bottom = -0.15700531
+text = "The Match Over"
+label_settings = SubResource("LabelSettings_7v4os")
+
+[node name="Name" type="Label" parent="GameOverPanel" unique_id=1085517644]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34800002
+anchor_top = 0.25800002
+anchor_right = 0.6
+anchor_bottom = 0.409
+offset_left = 0.02798462
+offset_top = -0.1620102
+offset_right = -0.4000244
+offset_bottom = -0.0010070801
+text = "The Score"
+label_settings = SubResource("LabelSettings_6byu3")
+
+[node name="LastPoint" type="ReferenceRect" parent="GameOverPanel" unique_id=949222770]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.32900003
+anchor_top = 0.43400002
+anchor_right = 0.619
+anchor_bottom = 0.597
+offset_left = -0.031036377
+offset_top = -0.22601318
+offset_right = 0.6589966
+offset_bottom = 0.066986084
+
+[node name="SegmentPoint" type="Label" parent="GameOverPanel/LastPoint" unique_id=1799320863]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.418
+anchor_right = 0.582
+anchor_bottom = 0.98700005
+offset_left = 0.0079956055
+offset_right = -0.008010864
+offset_bottom = 0.039993286
+text = ":"
+label_settings = SubResource("LabelSettings_pjscj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftPoint" type="Label" parent="GameOverPanel/LastPoint" unique_id=645092085]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.33200002
+anchor_bottom = 1.0
+offset_right = -0.008003235
+offset_bottom = 1.0
+text = "100"
+label_settings = SubResource("LabelSettings_leunp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightPoint" type="Label" parent="GameOverPanel/LastPoint" unique_id=66043184]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.66400003
+anchor_right = 0.99600005
+anchor_bottom = 1.0
+offset_left = -0.01600647
+offset_right = -0.024017334
+offset_bottom = 1.0
+text = "100"
+label_settings = SubResource("LabelSettings_m7n2d")
+
+[node name="Winner" type="ReferenceRect" parent="GameOverPanel" unique_id=36474239]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.11000001
+anchor_top = 0.671
+anchor_right = 0.837
+anchor_bottom = 0.87500006
+offset_left = -0.29000854
+offset_top = -0.11898804
+offset_right = -0.24298096
+offset_bottom = 0.12496948
+
+[node name="PreText" type="Label" parent="GameOverPanel/Winner" unique_id=1592778192]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.037
+anchor_right = 0.684
+anchor_bottom = 0.97200006
+offset_top = -3.6999974
+offset_right = -0.24002075
+offset_bottom = 3.7350006
+text = "The winner is"
+label_settings = SubResource("LabelSettings_65hh5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinnerLabel" type="Label" parent="GameOverPanel/Winner" unique_id=1878756471]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.689
+anchor_right = 1.0
+anchor_bottom = 0.99000007
+offset_left = -0.29000854
+text = "TIE"
+label_settings = ExtResource("18_yxkem")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=215856385]
 libraries/ = SubResource("AnimationLibrary_if7li")
