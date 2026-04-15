@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfhlgjgj7qmik"
-path="res://.godot/imported/Button_Clicked.png-c54885e6774a00b819af24af54c482ba.ctex"
+uid="uid://duq2a0uq6xwku"
+path="res://.godot/imported/SelectedFork.png-df8b23fdfa36d9aa482f88058d84d3ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Source/Texture/Button/Button_Clicked.png"
-dest_files=["res://.godot/imported/Button_Clicked.png-c54885e6774a00b819af24af54c482ba.ctex"]
+source_file="res://Source/Texture/Button/Fork/SelectedFork.png"
+dest_files=["res://.godot/imported/SelectedFork.png-df8b23fdfa36d9aa482f88058d84d3ec.ctex"]
 
 [params]
 

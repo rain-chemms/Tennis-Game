@@ -1,16 +1,22 @@
 [gd_scene format=3 uid="uid://yibyp7ry6gsw"]
 
-[ext_resource type="Script" uid="uid://dwiiutpie85r8" path="res://Scenes/MainMenu.gd" id="1_cmrfp"]
-[ext_resource type="Texture2D" uid="uid://d2ckaebvawalx" path="res://Source/Texture/Button/Button_Normal.png" id="1_ot053"]
-[ext_resource type="Texture2D" uid="uid://bfhlgjgj7qmik" path="res://Source/Texture/Button/Button_Clicked.png" id="2_3dx3g"]
-[ext_resource type="Texture2D" uid="uid://cve47o3hm141e" path="res://Source/Texture/Button/Button_Selected.png" id="3_5ry4h"]
-[ext_resource type="Texture2D" uid="uid://l871pn2l04m5" path="res://Source/Texture/Button/Button_Disable.png" id="4_o168s"]
+[ext_resource type="Script" uid="uid://dwiiutpie85r8" path="res://Scripts/Games/MainMenu.gd" id="1_cmrfp"]
+[ext_resource type="Texture2D" uid="uid://d2ckaebvawalx" path="res://Source/Texture/Button/Normal/Button_Normal.png" id="1_ot053"]
+[ext_resource type="Texture2D" uid="uid://bfhlgjgj7qmik" path="res://Source/Texture/Button/Normal/Button_Clicked.png" id="2_3dx3g"]
+[ext_resource type="Texture2D" uid="uid://cve47o3hm141e" path="res://Source/Texture/Button/Normal/Button_Selected.png" id="3_5ry4h"]
+[ext_resource type="Texture2D" uid="uid://l871pn2l04m5" path="res://Source/Texture/Button/Normal/Button_Disable.png" id="4_o168s"]
 [ext_resource type="LabelSettings" uid="uid://chjbbhy4gb2gj" path="res://Perfabs/LabelSettings/MenuLabelSettings.tres" id="5_jykax"]
 [ext_resource type="PackedScene" uid="uid://bkqr8hka0u6vw" path="res://Scenes/GameScene.tscn" id="6_8um5k"]
 [ext_resource type="LabelSettings" uid="uid://d2ihnv0k464p5" path="res://Perfabs/LabelSettings/UILabelSettings.tres" id="6_koqhg"]
 [ext_resource type="Script" uid="uid://d1fom4plufu2q" path="res://Scripts/Games/ExitButton.gd" id="7_cmrfp"]
 [ext_resource type="FontFile" uid="uid://dtpdiwli1pkvo" path="res://Source/Font/Chinese/MaShanZheng-Regular/MaShanZheng-Regular.ttf" id="10_if7li"]
 [ext_resource type="LabelSettings" uid="uid://be61v8uciahtf" path="res://Perfabs/LabelSettings/MatchSettingItemLabelSettings.tres" id="11_rrcx7"]
+[ext_resource type="Texture2D" uid="uid://dfeowx3lqe15i" path="res://Source/Texture/Button/Fork/NormalFork.png" id="12_2x1g0"]
+[ext_resource type="FontFile" uid="uid://csoplqxja2h0s" path="res://Source/Font/English/Sekuya-Regular/Sekuya-Regular.ttf" id="12_riqfo"]
+[ext_resource type="Texture2D" uid="uid://030oqyov3ent" path="res://Source/Texture/Button/Fork/PressedFork.png" id="13_riqfo"]
+[ext_resource type="Texture2D" uid="uid://duq2a0uq6xwku" path="res://Source/Texture/Button/Fork/SelectedFork.png" id="14_yxkem"]
+[ext_resource type="Texture2D" uid="uid://cke3dtma6p6pw" path="res://Source/Texture/Button/Fork/DisabledFork.png" id="15_7v4os"]
+[ext_resource type="Texture2D" uid="uid://cadlohqq4ta3f" path="res://Source/Texture/Button/Fork/HlightedFork.png" id="16_pjscj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fh7cp"]
 font = ExtResource("10_if7li")
@@ -46,6 +52,12 @@ outline_size = 3
 shadow_size = 7
 shadow_color = Color(0.10481311, 0.10481311, 0.10481309, 0.972549)
 
+[sub_resource type="LabelSettings" id="LabelSettings_yxkem"]
+font = ExtResource("12_riqfo")
+font_size = 22
+font_color = Color(0.117530085, 0.1175301, 0.117530085, 1)
+outline_size = 6
+
 [sub_resource type="Animation" id="Animation_loo7a"]
 resource_name = "HideUI"
 
@@ -63,10 +75,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cmrfp")
 
-[node name="GameScene" parent="." unique_id=592222660 instance=ExtResource("6_8um5k")]
+[node name="GameScene" parent="." unique_id=592222660 node_paths=PackedStringArray("gameOverPanel") instance=ExtResource("6_8um5k")]
+gameOverPanel = NodePath("../GameOverPanel")
 
-[node name="ButtonPanel" type="ReferenceRect" parent="." unique_id=1167999576]
-visible = false
+[node name="MainPanel" type="ReferenceRect" parent="." unique_id=155041171]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonPanel" type="ReferenceRect" parent="MainPanel" unique_id=1167999576]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.72900003
@@ -74,41 +95,41 @@ anchor_top = 0.522
 anchor_right = 0.95500004
 anchor_bottom = 0.95800006
 offset_left = 0.19195557
-offset_top = -0.25601196
+offset_top = 0.7879944
 offset_right = -0.16015625
-offset_bottom = 0.21594238
+offset_bottom = 1.2599487
 
-[node name="MultpleStartButton" type="TextureButton" parent="ButtonPanel" unique_id=1515316883]
+[node name="SettingButton" type="TextureButton" parent="MainPanel/ButtonPanel" unique_id=1515316883]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.123
-anchor_top = 0.35700002
-anchor_right = 0.892
-anchor_bottom = 0.62200004
-offset_left = 0.02001381
-offset_top = -0.03100586
-offset_right = 0.08010864
-offset_bottom = -0.026016235
+anchor_left = 0.142
+anchor_top = 0.35300002
+anchor_right = 0.91200006
+anchor_bottom = 0.61800003
+offset_left = 0.08001709
+offset_top = 0.100997925
+offset_right = -0.119903564
+offset_bottom = 0.10598755
 texture_normal = ExtResource("1_ot053")
 texture_pressed = ExtResource("2_3dx3g")
 texture_hover = ExtResource("3_5ry4h")
 texture_disabled = ExtResource("4_o168s")
 texture_focused = ExtResource("3_5ry4h")
 
-[node name="MulStrLabel" type="Label" parent="ButtonPanel/MultpleStartButton" unique_id=1193451270]
+[node name="SettingStrLabel" type="Label" parent="MainPanel/ButtonPanel/SettingButton" unique_id=1193451270]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.085
-anchor_top = 0.16000001
-anchor_right = 0.96500003
-anchor_bottom = 0.86700004
-offset_bottom = 1.9749985
-text = "Double"
+anchor_left = 0.055000003
+anchor_top = 0.147
+anchor_right = 0.97
+anchor_bottom = 0.88000005
+offset_top = -0.024998665
+text = "Setting"
 label_settings = ExtResource("6_koqhg")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SignalStartButton" type="TextureButton" parent="ButtonPanel" unique_id=751238932]
+[node name="StartButton" type="TextureButton" parent="MainPanel/ButtonPanel" unique_id=751238932]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.142
@@ -124,7 +145,7 @@ texture_hover = ExtResource("3_5ry4h")
 texture_disabled = ExtResource("4_o168s")
 texture_focused = ExtResource("3_5ry4h")
 
-[node name="SigStrLabel" type="Label" parent="ButtonPanel/SignalStartButton" unique_id=1083877347]
+[node name="StrLabel" type="Label" parent="MainPanel/ButtonPanel/StartButton" unique_id=1083877347]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.045
@@ -135,12 +156,12 @@ offset_left = -0.09000015
 offset_top = -0.025001526
 offset_right = -0.08201599
 offset_bottom = -0.02500534
-text = "Signal"
+text = "Start"
 label_settings = ExtResource("6_koqhg")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExtButton" type="TextureButton" parent="ButtonPanel" unique_id=59331811]
+[node name="ExtButton" type="TextureButton" parent="MainPanel/ButtonPanel" unique_id=59331811]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.13100001
@@ -158,7 +179,7 @@ texture_disabled = ExtResource("4_o168s")
 texture_focused = ExtResource("3_5ry4h")
 script = ExtResource("7_cmrfp")
 
-[node name="ExitLabel" type="Label" parent="ButtonPanel/ExtButton" unique_id=1351197873]
+[node name="ExitLabel" type="Label" parent="MainPanel/ButtonPanel/ExtButton" unique_id=1351197873]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.17
@@ -172,8 +193,7 @@ label_settings = ExtResource("6_koqhg")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NamePanel" type="ReferenceRect" parent="." unique_id=917724979]
-visible = false
+[node name="NamePanel" type="ReferenceRect" parent="MainPanel" unique_id=917724979]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.037
@@ -181,11 +201,11 @@ anchor_top = 0.074
 anchor_right = 0.65800005
 anchor_bottom = 0.83500004
 offset_left = 0.37599945
-offset_top = 0.048000336
+offset_top = 0.19599915
 offset_right = -0.016052246
-offset_bottom = -0.08001709
+offset_bottom = 0.067993164
 
-[node name="GameName" type="Label" parent="NamePanel" unique_id=2125888222]
+[node name="GameName" type="Label" parent="MainPanel/NamePanel" unique_id=2125888222]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.052
@@ -202,6 +222,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MatchSettings" type="Panel" parent="." unique_id=897778410]
+visible = false
 self_modulate = Color(0.78386897, 0.7472219, 1, 1)
 layout_mode = 1
 anchors_preset = -1
@@ -209,9 +230,9 @@ anchor_left = 0.115
 anchor_top = 0.12200001
 anchor_right = 0.882
 anchor_bottom = 0.878
-offset_left = 0.5200043
+offset_left = 43.520004
 offset_top = -0.056007385
-offset_right = -0.06402588
+offset_right = 0.9359741
 offset_bottom = 0.05596924
 grow_horizontal = 2
 grow_vertical = 2
@@ -247,13 +268,13 @@ offset_bottom = -8.810028
 [node name="Port" type="ReferenceRect" parent="MatchSettings/DoublePlayerSettings" unique_id=2143440674]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.27
-anchor_top = 0.37100002
-anchor_right = 0.772
+anchor_left = 0.20700002
+anchor_top = 0.37
+anchor_right = 0.822
 anchor_bottom = 0.51100004
-offset_left = 0.1499939
-offset_top = -0.13800812
-offset_right = -0.05999756
+offset_left = 0.110004425
+offset_top = 0.1309967
+offset_right = 0.05999756
 offset_bottom = -0.058013916
 
 [node name="PortLineEdit" type="LineEdit" parent="MatchSettings/DoublePlayerSettings/Port" unique_id=1492932985]
@@ -265,6 +286,8 @@ anchor_bottom = 1.0
 offset_left = 0.0399971
 offset_right = 0.015991211
 offset_bottom = -1.0
+placeholder_text = "8998"
+alignment = 1
 
 [node name="PortText" type="Label" parent="MatchSettings/DoublePlayerSettings/Port" unique_id=189809485]
 layout_mode = 1
@@ -285,13 +308,13 @@ vertical_alignment = 1
 [node name="IP" type="ReferenceRect" parent="MatchSettings/DoublePlayerSettings" unique_id=1012177234]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.268
+anchor_left = 0.19600001
 anchor_top = 0.19100001
-anchor_right = 0.76900005
+anchor_right = 0.82600003
 anchor_bottom = 0.30900002
-offset_left = -0.13999939
+offset_left = 0.080028534
 offset_top = -0.09800339
-offset_right = 0.0049743652
+offset_right = -0.019973755
 offset_bottom = 0.09799194
 
 [node name="IPLineEdit" type="LineEdit" parent="MatchSettings/DoublePlayerSettings/IP" unique_id=1856793129]
@@ -303,6 +326,8 @@ anchor_bottom = 1.0
 offset_left = 0.0399971
 offset_right = 0.015991211
 offset_bottom = -1.0
+placeholder_text = "192.168.1.X"
+alignment = 1
 
 [node name="IPText" type="Label" parent="MatchSettings/DoublePlayerSettings/IP" unique_id=960235553]
 layout_mode = 1
@@ -394,6 +419,9 @@ offset_left = -0.015007019
 offset_top = 0.00999999
 offset_right = 0.06100464
 offset_bottom = -0.010002136
+placeholder_text = "180"
+alignment = 1
+max_length = 3
 
 [node name="AfterLabel" type="Label" parent="MatchSettings/MatchData/MatchTime" unique_id=831202485]
 layout_mode = 1
@@ -468,8 +496,150 @@ offset_top = 0.0019999743
 offset_right = -0.020004272
 offset_bottom = -0.001001358
 
+[node name="SingleStartButton" type="TextureButton" parent="MatchSettings" unique_id=1191077649]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24000001
+anchor_top = 0.606
+anchor_right = 0.35900003
+anchor_bottom = 0.683
+offset_left = 0.1599884
+offset_top = 0.05999756
+offset_right = 100.08096
+offset_bottom = 37.329987
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("1_ot053")
+texture_pressed = ExtResource("2_3dx3g")
+texture_hover = ExtResource("3_5ry4h")
+texture_disabled = ExtResource("4_o168s")
+texture_focused = ExtResource("3_5ry4h")
+
+[node name="SingleLabel" type="Label" parent="MatchSettings/SingleStartButton" unique_id=1759236837]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.065000005
+anchor_top = 0.093
+anchor_right = 0.93500006
+anchor_bottom = 0.90700006
+offset_top = 0.024999619
+offset_right = -1.5258789e-05
+offset_bottom = -0.025001526
+text = "Single
+Player"
+label_settings = SubResource("LabelSettings_yxkem")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="MatchSettings" unique_id=622382597]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.053000003
+anchor_bottom = 0.091000006
+offset_right = 211.427
+offset_bottom = 211.41
+scale = Vector2(0.175, 0.175)
+texture_normal = ExtResource("12_2x1g0")
+texture_pressed = ExtResource("13_riqfo")
+texture_hover = ExtResource("14_yxkem")
+texture_disabled = ExtResource("15_7v4os")
+texture_focused = ExtResource("16_pjscj")
+
+[node name="SettingPanel" type="Panel" parent="." unique_id=1624069035]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.155
+anchor_top = 0.120000005
+anchor_right = 0.88500005
+anchor_bottom = 0.87700003
+offset_left = -0.55999756
+offset_top = 0.23999786
+offset_right = -0.52008057
+offset_bottom = -0.2960205
+
+[node name="Name" type="Label" parent="SettingPanel" unique_id=450327437]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.39400002
+anchor_top = 0.033
+anchor_right = 0.554
+anchor_bottom = 0.143
+offset_left = -0.35403442
+offset_top = -0.17000008
+offset_right = 0.08596802
+offset_bottom = -0.069999695
+text = "Settings"
+label_settings = SubResource("LabelSettings_fh7cp")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="SettingPanel" unique_id=165817113]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.27800003
+anchor_top = 0.23900001
+anchor_right = 0.652
+anchor_bottom = 0.35700002
+offset_left = 0.20198059
+offset_top = -0.11000061
+offset_right = -0.33203125
+offset_bottom = 0.069992065
+
+[node name="ExitButton" type="TextureButton" parent="SettingPanel" unique_id=1104709092]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.053000003
+anchor_bottom = 0.091000006
+offset_right = 211.427
+offset_bottom = 211.41
+scale = Vector2(0.175, 0.175)
+texture_normal = ExtResource("12_2x1g0")
+texture_pressed = ExtResource("13_riqfo")
+texture_hover = ExtResource("14_yxkem")
+texture_disabled = ExtResource("15_7v4os")
+texture_focused = ExtResource("16_pjscj")
+
+[node name="GameOverPanel" type="Panel" parent="." unique_id=1487631072]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.155
+anchor_top = 0.120000005
+anchor_right = 0.88400006
+anchor_bottom = 0.87500006
+offset_left = 0.44000244
+offset_top = 0.23999786
+offset_right = -0.368042
+offset_bottom = -6.1035156e-05
+
+[node name="ExitButton" type="TextureButton" parent="GameOverPanel" unique_id=1316187877]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.053000003
+anchor_bottom = 0.091000006
+offset_right = 211.427
+offset_bottom = 211.41
+scale = Vector2(0.175, 0.175)
+texture_normal = ExtResource("12_2x1g0")
+texture_pressed = ExtResource("13_riqfo")
+texture_hover = ExtResource("14_yxkem")
+texture_disabled = ExtResource("15_7v4os")
+texture_focused = ExtResource("16_pjscj")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=215856385]
 libraries/ = SubResource("AnimationLibrary_if7li")
 
-[connection signal="pressed" from="ButtonPanel/SignalStartButton" to="GameScene" method="SignalGameStart"]
-[connection signal="pressed" from="ButtonPanel/ExtButton" to="ButtonPanel/ExtButton" method="_on_pressed"]
+[connection signal="pressed" from="MainPanel/ButtonPanel/SettingButton" to="MainPanel" method="set_visible" binds= [false]]
+[connection signal="pressed" from="MainPanel/ButtonPanel/SettingButton" to="SettingPanel" method="set_visible" binds= [true]]
+[connection signal="pressed" from="MainPanel/ButtonPanel/StartButton" to="MainPanel" method="set_visible" binds= [false]]
+[connection signal="pressed" from="MainPanel/ButtonPanel/StartButton" to="MatchSettings" method="set_visible" binds= [true]]
+[connection signal="pressed" from="MainPanel/ButtonPanel/ExtButton" to="MainPanel/ButtonPanel/ExtButton" method="_on_pressed"]
+[connection signal="text_changed" from="MatchSettings/MatchData/MatchTime/LineEdit" to="." method="ChangeMatchTime"]
+[connection signal="toggled" from="MatchSettings/MatchData/SideSelect/CheckButton" to="." method="ChangeHostPlayerSide"]
+[connection signal="pressed" from="MatchSettings/SingleStartButton" to="GameScene" method="SignalGameStart"]
+[connection signal="pressed" from="MatchSettings/SingleStartButton" to="MainPanel" method="set_visible" binds= [false]]
+[connection signal="pressed" from="MatchSettings/SingleStartButton" to="MatchSettings" method="set_visible" binds= [false]]
+[connection signal="pressed" from="MatchSettings/ExitButton" to="MainPanel" method="set_visible" binds= [true]]
+[connection signal="pressed" from="MatchSettings/ExitButton" to="MatchSettings" method="set_visible" binds= [false]]
+[connection signal="pressed" from="SettingPanel/ExitButton" to="MainPanel" method="set_visible" binds= [true]]
+[connection signal="pressed" from="SettingPanel/ExitButton" to="SettingPanel" method="set_visible" binds= [false]]
+[connection signal="pressed" from="GameOverPanel/ExitButton" to="MainPanel" method="set_visible" binds= [true]]
+[connection signal="pressed" from="GameOverPanel/ExitButton" to="GameOverPanel" method="set_visible" binds= [false]]

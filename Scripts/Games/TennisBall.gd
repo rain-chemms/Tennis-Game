@@ -32,8 +32,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 	
 
-
 func _physics_process(delta: float) -> void:
+	print(global_position)
 	#刷新速度值
 	speed = baseSpeed
 	if hitTime >= 0:
@@ -54,3 +54,9 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node) -> void:
 	hitTime += 1
 	pass # Replace with function body.
+
+func ResetPlace()->void:
+	hitTime = 0
+	global_position.x = Global.tennisInitPos.x
+	global_position.y = Global.tennisInitPos.y
+	linear_velocity = Vector2.ZERO
