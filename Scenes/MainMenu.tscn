@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://yibyp7ry6gsw"]
 
+[ext_resource type="Script" uid="uid://dwiiutpie85r8" path="res://Scenes/MainMenu.gd" id="1_cmrfp"]
 [ext_resource type="Texture2D" uid="uid://d2ckaebvawalx" path="res://Source/Texture/Button/Button_Normal.png" id="1_ot053"]
 [ext_resource type="Texture2D" uid="uid://bfhlgjgj7qmik" path="res://Source/Texture/Button/Button_Clicked.png" id="2_3dx3g"]
 [ext_resource type="Texture2D" uid="uid://cve47o3hm141e" path="res://Source/Texture/Button/Button_Selected.png" id="3_5ry4h"]
@@ -8,6 +9,50 @@
 [ext_resource type="PackedScene" uid="uid://bkqr8hka0u6vw" path="res://Scenes/GameScene.tscn" id="6_8um5k"]
 [ext_resource type="LabelSettings" uid="uid://d2ihnv0k464p5" path="res://Perfabs/LabelSettings/UILabelSettings.tres" id="6_koqhg"]
 [ext_resource type="Script" uid="uid://d1fom4plufu2q" path="res://Scripts/Games/ExitButton.gd" id="7_cmrfp"]
+[ext_resource type="FontFile" uid="uid://dtpdiwli1pkvo" path="res://Source/Font/Chinese/MaShanZheng-Regular/MaShanZheng-Regular.ttf" id="10_if7li"]
+[ext_resource type="LabelSettings" uid="uid://be61v8uciahtf" path="res://Perfabs/LabelSettings/MatchSettingItemLabelSettings.tres" id="11_rrcx7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fh7cp"]
+font = ExtResource("10_if7li")
+font_size = 53
+font_color = Color(0.105882354, 1, 0.7764706, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 9
+shadow_color = Color(0.080783345, 0.080783345, 0.080783345, 0.6901961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8e205"]
+font = ExtResource("10_if7li")
+font_size = 37
+font_color = Color(0.25490198, 1, 0.8666667, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.7764706)
+
+[sub_resource type="LabelSettings" id="LabelSettings_if7li"]
+font = ExtResource("10_if7li")
+font_size = 26
+font_color = Color(1, 0, 0, 1)
+outline_size = 3
+shadow_size = 6
+shadow_color = Color(0.029506557, 0.029506557, 0.029506557, 0.8392157)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rrcx7"]
+font = ExtResource("10_if7li")
+font_size = 26
+font_color = Color(0, 0.53333336, 1, 1)
+outline_size = 3
+shadow_size = 7
+shadow_color = Color(0.10481311, 0.10481311, 0.10481309, 0.972549)
+
+[sub_resource type="Animation" id="Animation_loo7a"]
+resource_name = "HideUI"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_if7li"]
+_data = {
+&"HideUI": SubResource("Animation_loo7a")
+}
 
 [node name="MainMenuUI" type="Control" unique_id=544944147]
 layout_mode = 3
@@ -16,10 +61,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_cmrfp")
 
 [node name="GameScene" parent="." unique_id=592222660 instance=ExtResource("6_8um5k")]
 
 [node name="ButtonPanel" type="ReferenceRect" parent="." unique_id=1167999576]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.72900003
@@ -126,6 +173,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NamePanel" type="ReferenceRect" parent="." unique_id=917724979]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.037
@@ -152,6 +200,276 @@ text = "Tabel Tennis"
 label_settings = ExtResource("5_jykax")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MatchSettings" type="Panel" parent="." unique_id=897778410]
+self_modulate = Color(0.78386897, 0.7472219, 1, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.115
+anchor_top = 0.12200001
+anchor_right = 0.882
+anchor_bottom = 0.878
+offset_left = 0.5200043
+offset_top = -0.056007385
+offset_right = -0.06402588
+offset_bottom = 0.05596924
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Name" type="Label" parent="MatchSettings" unique_id=1004149979]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.351
+anchor_top = 0.033
+anchor_right = 0.656
+anchor_bottom = 0.143
+offset_left = 0.066986084
+offset_top = -0.17000008
+offset_right = -0.24798584
+offset_bottom = -0.069999695
+text = "Match Settings"
+label_settings = SubResource("LabelSettings_fh7cp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DoublePlayerSettings" type="ReferenceRect" parent="MatchSettings" unique_id=1939323311]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.614
+anchor_top = 0.202
+anchor_right = 0.92
+anchor_bottom = 0.76900005
+offset_left = -60.16205
+offset_top = 0.019996643
+offset_right = -60.359985
+offset_bottom = -8.810028
+
+[node name="Port" type="ReferenceRect" parent="MatchSettings/DoublePlayerSettings" unique_id=2143440674]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.27
+anchor_top = 0.37100002
+anchor_right = 0.772
+anchor_bottom = 0.51100004
+offset_left = 0.1499939
+offset_top = -0.13800812
+offset_right = -0.05999756
+offset_bottom = -0.058013916
+
+[node name="PortLineEdit" type="LineEdit" parent="MatchSettings/DoublePlayerSettings/Port" unique_id=1492932985]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33
+anchor_right = 0.98200005
+anchor_bottom = 1.0
+offset_left = 0.0399971
+offset_right = 0.015991211
+offset_bottom = -1.0
+
+[node name="PortText" type="Label" parent="MatchSettings/DoublePlayerSettings/Port" unique_id=189809485]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.006
+anchor_top = 0.031000001
+anchor_right = 0.342
+anchor_bottom = 0.9620001
+offset_left = 0.028004289
+offset_top = 0.008010209
+offset_right = -0.053993225
+offset_bottom = 0.012008667
+text = "Port:"
+label_settings = ExtResource("11_rrcx7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IP" type="ReferenceRect" parent="MatchSettings/DoublePlayerSettings" unique_id=1012177234]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.268
+anchor_top = 0.19100001
+anchor_right = 0.76900005
+anchor_bottom = 0.30900002
+offset_left = -0.13999939
+offset_top = -0.09800339
+offset_right = 0.0049743652
+offset_bottom = 0.09799194
+
+[node name="IPLineEdit" type="LineEdit" parent="MatchSettings/DoublePlayerSettings/IP" unique_id=1856793129]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33
+anchor_right = 0.98200005
+anchor_bottom = 1.0
+offset_left = 0.0399971
+offset_right = 0.015991211
+offset_bottom = -1.0
+
+[node name="IPText" type="Label" parent="MatchSettings/DoublePlayerSettings/IP" unique_id=960235553]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.023000002
+anchor_top = 0.034
+anchor_right = 0.33
+anchor_bottom = 0.966
+offset_left = -0.024000168
+offset_top = 0.013999939
+offset_right = -0.040000916
+offset_bottom = -0.013999939
+text = "IP:"
+label_settings = ExtResource("11_rrcx7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DoubleLabel" type="Label" parent="MatchSettings/DoublePlayerSettings" unique_id=516325984]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.20400001
+anchor_right = 0.79300004
+anchor_bottom = 0.133
+offset_left = -0.07997894
+offset_top = -1.0
+offset_right = -0.10998535
+offset_bottom = 0.026000977
+text = "Double Player"
+label_settings = SubResource("LabelSettings_8e205")
+
+[node name="MatchData" type="ReferenceRect" parent="MatchSettings" unique_id=1971666210]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.155
+anchor_top = 0.316
+anchor_right = 0.446
+anchor_bottom = 0.65900004
+offset_left = 1.1349945
+offset_top = -53.84001
+offset_right = 1.1819763
+offset_bottom = -53.910034
+
+[node name="MatchDataLabel" type="Label" parent="MatchSettings/MatchData" unique_id=767115248]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21800001
+anchor_right = 0.763
+anchor_bottom = 0.264
+offset_left = -0.026000977
+offset_right = -0.09100342
+offset_bottom = -0.01599884
+text = "Match Data"
+label_settings = SubResource("LabelSettings_8e205")
+
+[node name="MatchTime" type="ReferenceRect" parent="MatchSettings/MatchData" unique_id=1612991977]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.058000002
+anchor_top = 0.351
+anchor_right = 0.94200003
+anchor_bottom = 0.54800004
+offset_left = 0.09399986
+offset_top = 0.03199768
+offset_right = -0.0940094
+offset_bottom = -0.06400299
+
+[node name="BeforeLabel" type="Label" parent="MatchSettings/MatchData/MatchTime" unique_id=265105981]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0050000004
+anchor_top = 0.12100001
+anchor_right = 0.48000002
+anchor_bottom = 0.93900007
+offset_left = -0.0200001
+offset_top = 0.0069930553
+offset_right = 0.0799942
+offset_bottom = 0.012990952
+text = "MatchTime:"
+label_settings = ExtResource("11_rrcx7")
+
+[node name="LineEdit" type="LineEdit" parent="MatchSettings/MatchData/MatchTime" unique_id=1645623575]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.44500002
+anchor_top = 0.030000001
+anchor_right = 0.809
+anchor_bottom = 0.97
+offset_left = -0.015007019
+offset_top = 0.00999999
+offset_right = 0.06100464
+offset_bottom = -0.010002136
+
+[node name="AfterLabel" type="Label" parent="MatchSettings/MatchData/MatchTime" unique_id=831202485]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.83300006
+anchor_top = 0.091000006
+anchor_right = 0.97800004
+anchor_bottom = 0.90900004
+offset_left = -0.09101868
+offset_top = -0.0030002594
+offset_right = -0.006011963
+offset_bottom = 0.002998352
+text = "SEC"
+label_settings = ExtResource("11_rrcx7")
+
+[node name="SideSelect" type="ReferenceRect" parent="MatchSettings/MatchData" unique_id=1437820489]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.043
+anchor_top = 0.69600004
+anchor_right = 0.96900004
+anchor_bottom = 0.85700005
+offset_left = -0.051000595
+offset_top = 0.07199097
+offset_right = -0.03300476
+offset_bottom = 0.023986816
+
+[node name="RightText" type="Label" parent="MatchSettings/MatchData/SideSelect" unique_id=615488741]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.79800004
+anchor_right = 0.99600005
+anchor_bottom = 1.0
+offset_left = 0.07598877
+offset_right = -0.04801941
+text = "Right"
+label_settings = SubResource("LabelSettings_if7li")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftText" type="Label" parent="MatchSettings/MatchData/SideSelect" unique_id=2009230819]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.423
+anchor_right = 0.58500004
+anchor_bottom = 1.0
+offset_left = 1.3259964
+offset_right = 1.1499786
+text = "Left"
+label_settings = SubResource("LabelSettings_rrcx7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SideLabel" type="Label" parent="MatchSettings/MatchData/SideSelect" unique_id=762756040]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.41900003
+anchor_bottom = 1.0
+offset_right = -5.4560013
+text = "Side Select:"
+label_settings = ExtResource("11_rrcx7")
+
+[node name="CheckButton" type="CheckButton" parent="MatchSettings/MatchData/SideSelect" unique_id=1076037414]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.605
+anchor_top = 0.074
+anchor_right = 0.79
+anchor_bottom = 0.96300006
+offset_left = 0.009994507
+offset_top = 0.0019999743
+offset_right = -0.020004272
+offset_bottom = -0.001001358
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=215856385]
+libraries/ = SubResource("AnimationLibrary_if7li")
 
 [connection signal="pressed" from="ButtonPanel/SignalStartButton" to="GameScene" method="SignalGameStart"]
 [connection signal="pressed" from="ButtonPanel/ExtButton" to="ButtonPanel/ExtButton" method="_on_pressed"]

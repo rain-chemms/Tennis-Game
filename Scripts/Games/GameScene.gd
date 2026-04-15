@@ -13,11 +13,14 @@ const TENNISBALL_SCRIPT = preload("res://Scripts/Games/TennisBall.gd")
 @export var tennisWeb:RigidBody2D = null#球网,获取其位置进行玩家位置初始化
 @export var playerInitYOffset:float = 0.0#玩家初始位置与球网的Y偏移量
 @export var playerInitXOffset:float = 0.0#玩家初始位置与球网的X偏移量
+@export var timeClock:Node2D = null#计时表
 
 func _ready() -> void:
 	#默认启动计时器
-	if timer!=null:
-		timer.start()
+	if timer != null:
+		timer.paused
+	if timeClock != null:
+		timeClock.visible = false
 	pass
 
 func GameOver()->void:
@@ -28,27 +31,31 @@ func SignalGameStart()->void:
 	#重置的分数
 	Global.leftGoal = 0
 	Global.rightGoal = 0
-	#计时器重新计时
-	timer.start()
+	#计时器重新计时并显示时钟
+	if timeClock != null:
+		timeClock.visible = true
+	if timer!=null:
+		timer.wait_time = Global.matchTime
+		timer.start()
 	#重置球体的位置和打击次数
-	tennisBall.hitTime = 0
-	tennisBall.global_position = tennisInitPos
-	tennisBall.linear_velocity = Vector2.ZERO#使其静止
+	if tennisBall!=null:
+		tennisBall.hitTime = 0
+		tennisBall.global_position = tennisInitPos
+		tennisBall.linear_velocity = Vector2.ZERO#使其静止
 	#重置两侧玩家的位置
 	var webPos:Vector2 = Vector2.ZERO
 	if tennisWeb!=null:
 		webPos = tennisBall.global_position
 	if rightPlayer!=null:
 		rightPlayer.global_position = webPos + Vector2(playerInitXOffset,playerInitYOffset)
+		#右侧为Bot
+		rightPlayer.isControl = false
+		rightPlayer.isBot = true
 	if leftPlayer!=null:
 		leftPlayer.global_position = webPos + Vector2(-playerInitXOffset,-playerInitYOffset)
-	#设置属性
-	#左侧为玩家
-	leftPlayer.isControl = true
-	leftPlayer.isBot = false
-	#右侧为Bot
-	rightPlayer.isControl = false
-	rightPlayer.isBot = true
+		#左侧为玩家
+		leftPlayer.isControl = true
+		leftPlayer.isBot = false
 	pass
 
 func _on_clock_timer_timeout() -> void:

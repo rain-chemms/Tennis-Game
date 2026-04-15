@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://be61v8uciahtf"]
+
+[ext_resource type="FontFile" uid="uid://dtpdiwli1pkvo" path="res://Source/Font/Chinese/MaShanZheng-Regular/MaShanZheng-Regular.ttf" id="1_8bolc"]
+
+[resource]
+font = ExtResource("1_8bolc")
+font_size = 26
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 6
+shadow_color = Color(0.13333334, 0.13333334, 0.13333334, 0.84313726)
