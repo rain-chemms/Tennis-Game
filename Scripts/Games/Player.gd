@@ -153,10 +153,10 @@ func CheckBotControl()->void:
 	# 执行射线检测
 	var result = space_state.intersect_ray(query)
 	if result:
-		print("检测到碰撞体: ", result.collider.name)
-		print("碰撞点: ", result.position)
-		print("距离: ", from.distance_to(result.position))
-		print("剩余时间: ", from.distance_to(result.position) / velocity.length())
+		#print("检测到碰撞体: ", result.collider.name)
+		#print("碰撞点: ", result.position)
+		#print("距离: ", from.distance_to(result.position))
+		#print("剩余时间: ", from.distance_to(result.position) / velocity.length())
 		#检测到自身,则激活慢速状态
 		if result.collider == self:
 			isSlowMode = true

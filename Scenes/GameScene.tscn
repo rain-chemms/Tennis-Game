@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://bkqr8hka0u6vw"]
 
 [ext_resource type="Texture2D" uid="uid://bj61gri8wyopy" path="res://Source/Texture/Games/TableTennisTable.png" id="1_2wl7v"]
+[ext_resource type="Script" uid="uid://c7fuewe6vwgwg" path="res://Scripts/Games/GameScene.gd" id="1_lohlh"]
 [ext_resource type="PackedScene" uid="uid://2uhu1q2t42qa" path="res://Scenes/TennisBall.tscn" id="2_4bvgx"]
 [ext_resource type="Texture2D" uid="uid://c002cn06mptoh" path="res://Source/Texture/Games/TimeGrid.png" id="3_3mbwn"]
+[ext_resource type="Script" uid="uid://dxh73tr1f6x5q" path="res://Scripts/Games/TimeClock.gd" id="3_kilg5"]
 [ext_resource type="PackedScene" uid="uid://cdx00t8aawgse" path="res://Scenes/Player.tscn" id="4_jwv4s"]
+[ext_resource type="LabelSettings" uid="uid://cukgm458bnxfp" path="res://Perfabs/LabelSettings/TimeTextLabelSettings.tres" id="5_x6js8"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4bvgx"]
 
@@ -12,7 +15,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bvgx"]
 size = Vector2(646, 13)
 
-[node name="GameScene" type="Node2D" unique_id=592222660]
+[node name="GameScene" type="Node2D" unique_id=592222660 node_paths=PackedStringArray("timer")]
+script = ExtResource("1_lohlh")
+timer = NodePath("TimeClock/ClockTimer")
 
 [node name="TennisTable" type="RigidBody2D" parent="." unique_id=200797136]
 lock_rotation = true
@@ -78,35 +83,121 @@ rotation = -1.5707964
 shape = SubResource("RectangleShape2D_4bvgx")
 debug_color = Color(0.7, 0, 0.011666489, 0.41960785)
 
-[node name="TimeClock" type="Node2D" parent="." unique_id=1278583122]
+[node name="TimeClock" type="Node2D" parent="." unique_id=1278583122 node_paths=PackedStringArray("timer", "separatePoint", "minText1", "minText2", "secText1", "secText2")]
 position = Vector2(577, 25)
 scale = Vector2(0.5, 0.5)
+script = ExtResource("3_kilg5")
+timer = NodePath("ClockTimer")
+separatePoint = NodePath("SeparatePoint")
+minText1 = NodePath("MinuteClock/TimeGrid1/TextLabel")
+minText2 = NodePath("MinuteClock/TimeGrid2/TextLabel")
+secText1 = NodePath("SecondClock/TimeGrid1/TextLabel")
+secText2 = NodePath("SecondClock/TimeGrid2/TextLabel")
 
 [node name="MinuteClock" type="Node2D" parent="TimeClock" unique_id=1673822648]
 position = Vector2(-59, 0)
-
-[node name="TimeGrid2" type="Sprite2D" parent="TimeClock/MinuteClock" unique_id=238007973]
-position = Vector2(-25, 0)
-texture = ExtResource("3_3mbwn")
 
 [node name="TimeGrid1" type="Sprite2D" parent="TimeClock/MinuteClock" unique_id=2075433702]
 position = Vector2(25, 0)
 texture = ExtResource("3_3mbwn")
 
-[node name="SecondClock" type="Node2D" parent="TimeClock" unique_id=1766195997]
-position = Vector2(59, 0)
+[node name="TextLabel" type="Label" parent="TimeClock/MinuteClock/TimeGrid1" unique_id=1071082608]
+anchors_preset = -1
+anchor_left = 0.14
+anchor_top = 0.060000002
+anchor_right = 0.86
+anchor_bottom = 0.919
+offset_left = -25.0
+offset_top = -50.0
+offset_right = -25.0
+offset_bottom = -47.9
+text = "0"
+label_settings = ExtResource("5_x6js8")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="TimeGrid2" type="Sprite2D" parent="TimeClock/SecondClock" unique_id=482106003]
+[node name="TimeGrid2" type="Sprite2D" parent="TimeClock/MinuteClock" unique_id=238007973]
 position = Vector2(-25, 0)
 texture = ExtResource("3_3mbwn")
 
-[node name="TimeGrid1" type="Sprite2D" parent="TimeClock/SecondClock" unique_id=1653635504]
+[node name="TextLabel" type="Label" parent="TimeClock/MinuteClock/TimeGrid2" unique_id=1613713830]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.080000006
+anchor_right = 0.86
+anchor_bottom = 0.94000006
+offset_left = -23.0
+offset_top = -52.0
+offset_right = -25.0
+offset_bottom = -50.000008
+text = "0"
+label_settings = ExtResource("5_x6js8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SecondClock" type="Node2D" parent="TimeClock" unique_id=1766195997]
+position = Vector2(59, 0)
+
+[node name="TimeGrid1" type="Sprite2D" parent="TimeClock/SecondClock" unique_id=482106003]
+position = Vector2(-25, 0)
+texture = ExtResource("3_3mbwn")
+
+[node name="TextLabel" type="Label" parent="TimeClock/SecondClock/TimeGrid1" unique_id=1214080557]
+anchors_preset = -1
+anchor_left = 0.14
+anchor_top = 0.060000002
+anchor_right = 0.86
+anchor_bottom = 0.919
+offset_left = -25.0
+offset_top = -50.0
+offset_right = -25.0
+offset_bottom = -47.9
+text = "0"
+label_settings = ExtResource("5_x6js8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeGrid2" type="Sprite2D" parent="TimeClock/SecondClock" unique_id=1653635504]
 position = Vector2(25, 0)
 texture = ExtResource("3_3mbwn")
 
+[node name="TextLabel" type="Label" parent="TimeClock/SecondClock/TimeGrid2" unique_id=763472193]
+anchors_preset = -1
+anchor_left = 0.14
+anchor_top = 0.060000002
+anchor_right = 0.86
+anchor_bottom = 0.919
+offset_left = -25.0
+offset_top = -50.0
+offset_right = -25.0
+offset_bottom = -47.9
+text = "0"
+label_settings = ExtResource("5_x6js8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SeparatePoint" type="Node2D" parent="TimeClock" unique_id=901860601]
+
+[node name="TextLabel" type="Label" parent="TimeClock/SeparatePoint" unique_id=901391882]
+anchors_preset = -1
+offset_left = -8.0
+offset_top = -42.0
+offset_right = 11.047607
+offset_bottom = 41.0
+scale = Vector2(0.84000003, 0.84000003)
+text = ":"
+label_settings = ExtResource("5_x6js8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClockTimer" type="Timer" parent="TimeClock" unique_id=839914180]
+wait_time = 360.0
+one_shot = true
+autostart = true
+
 [node name="LeftPlayer" parent="." unique_id=601225930 instance=ExtResource("4_jwv4s")]
 position = Vector2(20, 323)
-isControl = true
+isBot = true
 
 [node name="RightPlayer" parent="." unique_id=1665500179 instance=ExtResource("4_jwv4s")]
 position = Vector2(777, 323)
@@ -117,3 +208,5 @@ botMoveForce = 3000.0
 
 [node name="TennisBall" parent="." unique_id=643390028 instance=ExtResource("2_4bvgx")]
 position = Vector2(351, 190)
+
+[connection signal="timeout" from="TimeClock/ClockTimer" to="." method="_on_clock_timer_timeout"]
