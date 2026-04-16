@@ -129,11 +129,12 @@ mainPanel = NodePath("MainPanel")
 settingPanel = NodePath("SettingPanel")
 matchPanel = NodePath("MatchSettings")
 
-[node name="GameScene" parent="." unique_id=592222660 node_paths=PackedStringArray("gameOverPanel", "winnerLabel", "leftPointLabel", "rightPointLabel") instance=ExtResource("6_8um5k")]
+[node name="GameScene" parent="." unique_id=592222660 node_paths=PackedStringArray("gameOverPanel", "winnerLabel", "leftPointLabel", "rightPointLabel", "matchPanel") instance=ExtResource("6_8um5k")]
 gameOverPanel = NodePath("../GameOverPanel")
 winnerLabel = NodePath("../GameOverPanel/Winner/WinnerLabel")
 leftPointLabel = NodePath("../GameOverPanel/LastPoint/LeftPoint")
 rightPointLabel = NodePath("../GameOverPanel/LastPoint/RightPoint")
+matchPanel = NodePath("../MatchSettings")
 
 [node name="MainPanel" type="ReferenceRect" parent="." unique_id=155041171]
 visible = false

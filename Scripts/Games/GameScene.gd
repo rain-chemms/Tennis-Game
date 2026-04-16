@@ -28,6 +28,7 @@ const RIGHTWIN_LABELSETTINGS = preload("res://Perfabs/LabelSettings/RightWin.tre
 const TIEGAME_LABELSETTINGS = preload("res://Perfabs/LabelSettings/TieGame.tres")
 
 @export var playerContainer:Node2D = null
+@export var matchPanel:Control = null
 
 func _ready() -> void:
 	#默认启动计时器
@@ -72,6 +73,8 @@ func GameOver()->void:
 	pass
 
 func SignalGameStart()->void:
+	#设置模式
+	Global.isSignalMode = true
 	#重置的分数
 	Global.leftGoal = 0
 	Global.rightGoal = 0
@@ -136,7 +139,16 @@ func JoinGame():
 	if error != OK:
 		print("加入游戏失败")
 		return error
+	#设置模式
+	Global.isSignalMode = false
 	multiplayer.multiplayer_peer = peer
+	#清除playerContiner中的玩家
+	ClearPlayerContainer()
+	#打开信息显示面板
+	if massagePanel != null:
+		massagePanel.visible = true
+	if matchPanel !=null:
+		matchPanel.visible = false
 	pass
 
 func CreateGame():
@@ -145,37 +157,77 @@ func CreateGame():
 	if error != OK:
 		print("创建游戏房间失败")
 		return error
+	#设置模式
+	Global.isSignalMode = false
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	#创建游戏时生成玩家
 	#清除playerContiner中的玩家
 	ClearPlayerContainer()
-	add_net_player(multiplayer.get_unique_id())
+	#打开信息显示面板
+	if massagePanel != null:
+		massagePanel.visible = true
+	if matchPanel !=null:
+		matchPanel.visible = false
+	_spawn_player_for_client(multiplayer.get_unique_id(), Global.choiceSide) # 服务器主机使用自己的选边pass
 	pass
 
-func add_net_player(id:int)->void:
+# 在客户端脚本中（例如，一个全局的GameClientManager脚本）
+# 此函数由服务器通过rpc_id调用
+@rpc("call_local", "reliable")
+func request_client_registration() -> void:
+	print("服务器请求注册，正在发送选边信息: ", Global.choiceSide)
+	# 客户端调用服务器的RPC函数，将自己的 Global.choiceSide 发送过去
+	rpc_id(1, "register_player_with_side", Global.choiceSide) # 1 是服务器的peer id
+	pass
+
+# 一个内部函数，用于根据客户端ID和其提供的阵营数据生成玩家
+func _spawn_player_for_client(id: int, side: bool) -> void:
 	var newPlayer = PLAYER_SCENE.instantiate()
 	newPlayer.name = str(id)
-	#设置玩家的阵营
-	if newPlayer!=null and (newPlayer is PLAYER_SCRIPT):
-		newPlayer.side = Global.choiceSide
-	#设置玩家出生地点
-	if newPlayer!=null:
-		var webPos:Vector2 = Vector2.ZERO
-		if tennisWeb!=null:
-			webPos = tennisBall.global_position
-		if newPlayer.side:
-			newPlayer.global_position = webPos + Vector2(playerInitXOffset,playerInitYOffset)
-		else:
-			newPlayer.global_position = webPos + Vector2(-playerInitXOffset,-playerInitYOffset)
-			
+	# 关键：使用从客户端RPC参数接收到的 side 数据，而非服务器的 Global.choiceSide
+	if newPlayer is PLAYER_SCRIPT:
+		newPlayer.side = side
+		newPlayer.set_multiplayer_authority(id) # 重要：设置权限，使该客户端能控制此玩家节点
+		newPlayer.isBot = false
+		newPlayer.isControl = true
+	# 设置玩家出生地点
+	var webPos: Vector2 = Vector2.ZERO
+	if tennisWeb != null:
+		webPos = tennisWeb.global_position # 注意：这里修正了可能的笔误，原代码是tennisBall.global_position
+	if side: # 使用传入的side参数
+		newPlayer.global_position = webPos + Vector2(playerInitXOffset, playerInitYOffset)
+	else:
+		newPlayer.global_position = webPos + Vector2(-playerInitXOffset, -playerInitYOffset)
+		
+	if playerContainer != null:
+		playerContainer.add_child(newPlayer) # 第二个参数为 true 表示远程同步
+	print("为客户端 ", id, " 生成玩家，阵营: ", side)
+	pass
+
+'''
+#添加客户端玩家对等体
+func add_net_player(id:int)->void:
+	var newPlayer = PLAYER_SCENE.instantiate()
+	newPlayer.name = str(id)			
 	if playerContainer != null:
 		playerContainer.add_child(newPlayer)
 	pass
-	
+'''
+
+# 这是一个RPC调用，客户端收到请求后，调用此函数将自己的数据发送给服务器。
+@rpc("any_peer", "call_local", "reliable")
+func register_player_with_side(side_from_client: bool) -> void:
+	# 获取调用此RPC的客户端ID
+	var sender_id = multiplayer.get_remote_sender_id()
+	print("接收到客户端 ", sender_id, " 的选边数据: ", side_from_client)
+	# 服务器使用客户端发来的数据创建玩家
+	_spawn_player_for_client(sender_id, side_from_client)
+	pass
+
 func _on_peer_connected(id:int) -> void:
 	print("已连接新的客户端ID:"+str(id))
-	add_net_player(id)
+	rpc_id(id, "request_client_registration")
 	pass
 
 func Disconnect()->void:

@@ -45,9 +45,12 @@ func _physics_process(delta: float) -> void:
 	linear_velocity = linear_velocity.normalized() * nowSpeed
 	pass
 
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
+
 func _input(event: InputEvent) -> void:
 	#玩家可控时才可以相应操作
-	if !isControl:
+	if !isControl || (!is_multiplayer_authority() && !Global.isSignalMode):
 		return
 	#优先计算玩家的速度和方向
 	#Y方向

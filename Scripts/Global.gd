@@ -1,5 +1,8 @@
 extends Node
 
+#单人多人模式选择
+var isSignalMode:bool = true
+
 #常量设置
 const tennisInitPos:Vector2 = Vector2(576,323)
 
