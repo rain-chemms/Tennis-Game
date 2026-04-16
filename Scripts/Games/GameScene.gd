@@ -1,8 +1,12 @@
 extends Node2D
 
+#常量
 const PLAYER_SCRIPT = preload("res://Scripts/Games/Player.gd")
 const TENNISBALL_SCRIPT = preload("res://Scripts/Games/TennisBall.gd")
+const PLAYER_SCENE = preload("res://Scenes/Player.tscn")
 
+'''------------------------------------------------------------'''
+#单人游戏处理相关
 @export var timer:Timer = null#计时器
 
 @export var tennisBall:TENNISBALL_SCRIPT = null#小球体
@@ -22,6 +26,8 @@ const TENNISBALL_SCRIPT = preload("res://Scripts/Games/TennisBall.gd")
 const LEFTWIN_LABELSETTINGS = preload("res://Perfabs/LabelSettings/LeftWin.tres")
 const RIGHTWIN_LABELSETTINGS = preload("res://Perfabs/LabelSettings/RightWin.tres")
 const TIEGAME_LABELSETTINGS = preload("res://Perfabs/LabelSettings/TieGame.tres")
+
+@export var playerContainer:Node2D = null
 
 func _ready() -> void:
 	#默认启动计时器
@@ -78,6 +84,12 @@ func SignalGameStart()->void:
 	#重置球体的位置和打击次数
 	if tennisBall!=null:
 		tennisBall.ResetPlace()
+	#删除当前所有,创建新的玩家
+	ClearPlayerContainer()
+	leftPlayer = PLAYER_SCENE.instantiate()
+	rightPlayer = PLAYER_SCENE.instantiate()
+	playerContainer.add_child(leftPlayer)
+	playerContainer.add_child(rightPlayer)
 	#重置两侧玩家的位置
 	var webPos:Vector2 = Vector2.ZERO
 	if tennisWeb!=null:
@@ -104,3 +116,78 @@ func SignalGameStart()->void:
 func _on_clock_timer_timeout() -> void:
 	GameOver()
 	pass # Replace with function body.
+'''------------------------------------------------------------'''
+#通用函数方法
+func ClearPlayerContainer()->void:
+	if playerContainer!=null:
+		for child in playerContainer.get_children():
+			child.queue_free()
+			
+'''------------------------------------------------------------'''
+#多人游戏处理相关
+var peer:ENetMultiplayerPeer = ENetMultiplayerPeer.new()
+var ip:String = "127.0.0.1"
+var port:int = 8989
+var isHost:bool = false
+#Host最大的连接数
+const MAX_CLIENTS:int = 4
+func JoinGame():
+	var error = peer.create_client(ip,port)
+	if error != OK:
+		print("加入游戏失败")
+		return error
+	multiplayer.multiplayer_peer = peer
+	pass
+
+func CreateGame():
+	peer = ENetMultiplayerPeer.new()
+	var error = peer.create_server(port, MAX_CLIENTS)
+	if error != OK:
+		print("创建游戏房间失败")
+		return error
+	multiplayer.multiplayer_peer = peer
+	multiplayer.peer_connected.connect(_on_peer_connected)
+	#创建游戏时生成玩家
+	#清除playerContiner中的玩家
+	ClearPlayerContainer()
+	add_net_player(multiplayer.get_unique_id())
+	pass
+
+func add_net_player(id:int)->void:
+	var newPlayer = PLAYER_SCENE.instantiate()
+	newPlayer.name = str(id)
+	#设置玩家的阵营
+	if newPlayer!=null and (newPlayer is PLAYER_SCRIPT):
+		newPlayer.side = Global.choiceSide
+	#设置玩家出生地点
+	if newPlayer!=null:
+		var webPos:Vector2 = Vector2.ZERO
+		if tennisWeb!=null:
+			webPos = tennisBall.global_position
+		if newPlayer.side:
+			newPlayer.global_position = webPos + Vector2(playerInitXOffset,playerInitYOffset)
+		else:
+			newPlayer.global_position = webPos + Vector2(-playerInitXOffset,-playerInitYOffset)
+			
+	if playerContainer != null:
+		playerContainer.add_child(newPlayer)
+	pass
+	
+func _on_peer_connected(id:int) -> void:
+	print("已连接新的客户端ID:"+str(id))
+	add_net_player(id)
+	pass
+
+func Disconnect()->void:
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+
+func ChangeIP(newIP:String)->void:
+	ip = newIP
+	pass
+
+func ChangePort(newPort:String)->void:
+	var port:int = 8989
+	if newPort.is_valid_int():
+		port = newPort.to_int()
+	port = port
+	pass

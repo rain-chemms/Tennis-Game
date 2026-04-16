@@ -9,8 +9,6 @@ radius = 38.118237
 [node name="TennisBall" type="RigidBody2D" unique_id=1769404096 groups=["TennisBall"]]
 mass = 0.01
 script = ExtResource("1_fdwen")
-baseSpeed = null
-speedIncreaseUnit = null
 maxSpeed = 900.0
 
 [node name="TennisBall" type="Sprite2D" parent="." unique_id=363945286]

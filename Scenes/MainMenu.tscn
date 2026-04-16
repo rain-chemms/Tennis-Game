@@ -37,6 +37,12 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 7
 shadow_color = Color(0, 0, 0, 0.7764706)
 
+[sub_resource type="LabelSettings" id="LabelSettings_yxkem"]
+font = ExtResource("12_riqfo")
+font_size = 22
+font_color = Color(0.117530085, 0.1175301, 0.117530085, 1)
+outline_size = 6
+
 [sub_resource type="LabelSettings" id="LabelSettings_if7li"]
 font = ExtResource("10_if7li")
 font_size = 26
@@ -52,12 +58,6 @@ font_color = Color(0, 0.53333336, 1, 1)
 outline_size = 3
 shadow_size = 7
 shadow_color = Color(0.10481311, 0.10481311, 0.10481309, 0.972549)
-
-[sub_resource type="LabelSettings" id="LabelSettings_yxkem"]
-font = ExtResource("12_riqfo")
-font_size = 22
-font_color = Color(0.117530085, 0.1175301, 0.117530085, 1)
-outline_size = 6
 
 [sub_resource type="LabelSettings" id="LabelSettings_7v4os"]
 font = ExtResource("12_riqfo")
@@ -136,6 +136,7 @@ leftPointLabel = NodePath("../GameOverPanel/LastPoint/LeftPoint")
 rightPointLabel = NodePath("../GameOverPanel/LastPoint/RightPoint")
 
 [node name="MainPanel" type="ReferenceRect" parent="." unique_id=155041171]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -279,7 +280,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MatchSettings" type="Panel" parent="." unique_id=897778410]
-visible = false
 self_modulate = Color(0.78386897, 0.7472219, 1, 1)
 layout_mode = 1
 anchors_preset = -1
@@ -414,6 +414,72 @@ offset_right = -0.10998535
 offset_bottom = 0.026000977
 text = "Double Player"
 label_settings = SubResource("LabelSettings_8e205")
+
+[node name="JoinButton" type="TextureButton" parent="MatchSettings/DoublePlayerSettings" unique_id=1834677116]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.528
+anchor_top = 0.69100004
+anchor_right = 0.91700006
+anchor_bottom = 0.83000004
+offset_left = 0.013839722
+offset_top = -0.05000305
+offset_right = 99.98323
+offset_bottom = 37.559006
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("1_ot053")
+texture_pressed = ExtResource("2_3dx3g")
+texture_hover = ExtResource("3_5ry4h")
+texture_disabled = ExtResource("4_o168s")
+texture_focused = ExtResource("3_5ry4h")
+
+[node name="JoinLabel" type="Label" parent="MatchSettings/DoublePlayerSettings/JoinButton" unique_id=1621215767]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.065000005
+anchor_top = 0.093
+anchor_right = 0.93500006
+anchor_bottom = 0.90700006
+offset_top = 0.024999619
+offset_right = -1.5258789e-05
+offset_bottom = -0.025001526
+text = "Join"
+label_settings = SubResource("LabelSettings_yxkem")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreateButton" type="TextureButton" parent="MatchSettings/DoublePlayerSettings" unique_id=1924535900]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.093
+anchor_top = 0.69100004
+anchor_right = 0.48100004
+anchor_bottom = 0.83100003
+offset_left = -0.12677002
+offset_top = 0.12098694
+offset_right = 100.09976
+offset_bottom = 37.461
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("1_ot053")
+texture_pressed = ExtResource("2_3dx3g")
+texture_hover = ExtResource("3_5ry4h")
+texture_disabled = ExtResource("4_o168s")
+texture_focused = ExtResource("3_5ry4h")
+
+[node name="CreateLabel" type="Label" parent="MatchSettings/DoublePlayerSettings/CreateButton" unique_id=1534373173]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.065000005
+anchor_top = 0.093
+anchor_right = 0.93500006
+anchor_bottom = 0.90700006
+offset_top = 0.024999619
+offset_right = -1.5258789e-05
+offset_bottom = -0.025001526
+text = "Create"
+label_settings = SubResource("LabelSettings_yxkem")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MatchData" type="ReferenceRect" parent="MatchSettings" unique_id=1971666210]
 layout_mode = 1
@@ -655,6 +721,7 @@ texture_disabled = ExtResource("15_7v4os")
 texture_focused = ExtResource("16_pjscj")
 
 [node name="GameOverPanel" type="Panel" parent="." unique_id=1487631072]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.155
@@ -804,6 +871,10 @@ libraries/ = SubResource("AnimationLibrary_if7li")
 [connection signal="pressed" from="MainPanel/ButtonPanel/StartButton" to="MainPanel" method="set_visible" binds= [false]]
 [connection signal="pressed" from="MainPanel/ButtonPanel/StartButton" to="MatchSettings" method="set_visible" binds= [true]]
 [connection signal="pressed" from="MainPanel/ButtonPanel/ExtButton" to="MainPanel/ButtonPanel/ExtButton" method="_on_pressed"]
+[connection signal="text_changed" from="MatchSettings/DoublePlayerSettings/Port/PortLineEdit" to="GameScene" method="ChangePort"]
+[connection signal="text_changed" from="MatchSettings/DoublePlayerSettings/IP/IPLineEdit" to="GameScene" method="ChangeIP"]
+[connection signal="pressed" from="MatchSettings/DoublePlayerSettings/JoinButton" to="GameScene" method="JoinGame"]
+[connection signal="pressed" from="MatchSettings/DoublePlayerSettings/CreateButton" to="GameScene" method="CreateGame"]
 [connection signal="text_changed" from="MatchSettings/MatchData/MatchTime/LineEdit" to="." method="ChangeMatchTime"]
 [connection signal="toggled" from="MatchSettings/MatchData/SideSelect/CheckButton" to="." method="ChangeHostPlayerSide"]
 [connection signal="pressed" from="MatchSettings/SingleStartButton" to="GameScene" method="SignalGameStart"]

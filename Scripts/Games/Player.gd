@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 			nowSpeed = normalMaxSpeed
 	linear_velocity = linear_velocity.normalized() * nowSpeed
 	pass
-	
+
 func _input(event: InputEvent) -> void:
 	#玩家可控时才可以相应操作
 	if !isControl:

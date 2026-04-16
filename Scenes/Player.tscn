@@ -19,3 +19,5 @@ texture = ExtResource("1_rpqav")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1572716112]
 shape = SubResource("RectangleShape2D_kyqiw")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1314140943]

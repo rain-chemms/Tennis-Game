@@ -39,16 +39,19 @@ size = Vector2(646, 13)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6vvcf"]
 distance = -60.0
 
-[node name="GameScene" type="Node2D" unique_id=592222660 node_paths=PackedStringArray("timer", "tennisBall", "leftPlayer", "rightPlayer", "tennisWeb", "massagePanel")]
+[node name="GameScene" type="Node2D" unique_id=592222660 node_paths=PackedStringArray("timer", "tennisBall", "leftPlayer", "rightPlayer", "tennisWeb", "massagePanel", "playerContainer")]
 script = ExtResource("1_lohlh")
 timer = NodePath("MessagePanel/TimeClock/ClockTimer")
 tennisBall = NodePath("TennisBall")
-leftPlayer = NodePath("LeftPlayer")
-rightPlayer = NodePath("RightPlayer")
+leftPlayer = NodePath("PlayerContainer/LeftPlayer")
+rightPlayer = NodePath("PlayerContainer/RightPlayer")
 tennisWeb = NodePath("TennisWeb")
 playerInitYOffset = 400.0
 playerInitXOffset = 100.0
 massagePanel = NodePath("MessagePanel")
+playerContainer = NodePath("PlayerContainer")
+
+[node name="Lobby" type="Node2D" parent="." unique_id=1499239886]
 
 [node name="TennisTable" type="RigidBody2D" parent="." unique_id=200797136]
 lock_rotation = true
@@ -267,21 +270,21 @@ rotation = -1.5707964
 shape = SubResource("RectangleShape2D_4bvgx")
 debug_color = Color(0.7, 0, 0.011666489, 0.41960785)
 
-[node name="LeftPlayer" parent="." unique_id=601225930 instance=ExtResource("4_jwv4s")]
+[node name="TennisBall" parent="." unique_id=643390028 instance=ExtResource("2_4bvgx")]
+position = Vector2(434, 274)
+
+[node name="PlayerContainer" type="Node2D" parent="." unique_id=1608629665]
+
+[node name="LeftPlayer" parent="PlayerContainer" unique_id=601225930 instance=ExtResource("4_jwv4s")]
 position = Vector2(20, 323)
 isBot = true
 
-[node name="RightPlayer" parent="." unique_id=1665500179 instance=ExtResource("4_jwv4s")]
+[node name="RightPlayer" parent="PlayerContainer" unique_id=1665500179 instance=ExtResource("4_jwv4s")]
 position = Vector2(777, 323)
 side = true
 isBot = true
 botSlowActiveDistance = 1.0
 botMoveForce = 3000.0
-
-[node name="TennisBall" parent="." unique_id=643390028 instance=ExtResource("2_4bvgx")]
-position = Vector2(434, 274)
-baseSpeed = 300.0
-speedIncreaseUnit = 5.0
 
 [node name="LeftGoalCheckArea" type="Area2D" parent="." unique_id=458045322]
 position = Vector2(1201, 323)

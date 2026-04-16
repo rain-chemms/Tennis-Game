@@ -33,7 +33,7 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
-	print(global_position)
+	#print(global_position)
 	#刷新速度值
 	speed = baseSpeed
 	if hitTime >= 0:
